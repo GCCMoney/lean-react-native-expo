@@ -6,22 +6,24 @@ const pkg = require('../../../package.json');
 
 class Lean {
   constructor({
-    env,
-    version,
-    country,
-    appToken,
-    language,
-    showLogs,
-    isSandbox,
-    customization,
-  }) {
+                env,
+                version,
+                country,
+                appToken,
+                language,
+                showLogs,
+                isSandbox,
+                customization,
+              }) {
     this.env = env;
     this.version = version;
     this.country = country;
     this.language = language;
     this.appToken = appToken;
     this.isSandbox = isSandbox;
-    this.customization = customization;
+    this.customization = customization || {
+      overlay_color: '#FFFFFF'
+    };
     this.baseURL = `https://cdn.leantech.me/link/loader/prod/${this.country}/latest/lean-sdk.html`;
 
     Logger.showLogs = showLogs;
@@ -96,13 +98,13 @@ class Lean {
   //  ================    Link methods    ================    //
 
   link({
-    customer_id,
-    permissions,
-    bank_identifier,
-    fail_redirect_url,
-    success_redirect_url,
-    access_token,
-  }) {
+         customer_id,
+         permissions,
+         bank_identifier,
+         fail_redirect_url,
+         success_redirect_url,
+         access_token,
+       }) {
     const permissionsParams = this.convertPermissionsToURLString(permissions);
     const customizationParams = this.convertCustomizationToURLString();
 
@@ -141,18 +143,18 @@ class Lean {
   }
 
   connect({
-    access_to,
-    access_from,
-    permissions,
-    customer_id,
-    end_user_id,
-    bank_identifier,
-    fail_redirect_url,
-    success_redirect_url,
-    payment_destination_id,
-    account_type,
-    access_token,
-  }) {
+            access_to,
+            access_from,
+            permissions,
+            customer_id,
+            end_user_id,
+            bank_identifier,
+            fail_redirect_url,
+            success_redirect_url,
+            payment_destination_id,
+            account_type,
+            access_token,
+          }) {
     const permissionsParams = this.convertPermissionsToURLString(permissions);
     const customizationParams = this.convertCustomizationToURLString();
 
@@ -238,13 +240,13 @@ class Lean {
   }
 
   createBeneficiary({
-    customer_id,
-    payment_source_id,
-    fail_redirect_url,
-    success_redirect_url,
-    payment_destination_id,
-    access_token,
-  }) {
+                      customer_id,
+                      payment_source_id,
+                      fail_redirect_url,
+                      success_redirect_url,
+                      payment_destination_id,
+                      access_token,
+                    }) {
     const customizationParams = this.convertCustomizationToURLString();
 
     let initializationURL = this.baseUrl
@@ -287,13 +289,13 @@ class Lean {
   }
 
   createPaymentSource({
-    customer_id,
-    bank_identifier,
-    fail_redirect_url,
-    success_redirect_url,
-    payment_destination_id,
-    access_token,
-  }) {
+                        customer_id,
+                        bank_identifier,
+                        fail_redirect_url,
+                        success_redirect_url,
+                        payment_destination_id,
+                        access_token,
+                      }) {
     const customizationParams = this.convertCustomizationToURLString();
 
     let initializationURL = this.baseUrl
@@ -336,14 +338,14 @@ class Lean {
   }
 
   updatePaymentSource({
-    end_user_id,
-    customer_id,
-    payment_source_id,
-    fail_redirect_url,
-    success_redirect_url,
-    payment_destination_id,
-    access_token,
-  }) {
+                        end_user_id,
+                        customer_id,
+                        payment_source_id,
+                        fail_redirect_url,
+                        success_redirect_url,
+                        payment_destination_id,
+                        access_token,
+                      }) {
     const customizationParams = this.convertCustomizationToURLString();
 
     let initializationURL = this.baseUrl
@@ -392,15 +394,15 @@ class Lean {
   }
 
   pay({
-    account_id,
-    end_user_id,
-    show_balances,
-    fail_redirect_url,
-    payment_intent_id,
-    success_redirect_url,
-    bulk_payment_intent_id,
-    access_token,
-  }) {
+        account_id,
+        end_user_id,
+        show_balances,
+        fail_redirect_url,
+        payment_intent_id,
+        success_redirect_url,
+        bulk_payment_intent_id,
+        access_token,
+      }) {
     const customizationParams = this.convertCustomizationToURLString();
 
     let initializationURL = this.baseUrl
