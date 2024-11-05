@@ -124,16 +124,16 @@ const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
     zIndex: 999,
-
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
 
   },
   contentContainer: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
 
   },
   webView: {
     flex: 1,
+
 
   },
   loadingContainer: {
